@@ -1,5 +1,6 @@
 import React from 'react';
 import { getCategories } from '../services/api';
+import Category from './Category';
 
 class Categories extends React.Component {
   constructor() {
@@ -23,10 +24,16 @@ class Categories extends React.Component {
 
   render() {
     const { listAll } = this.state;
+    if (listAll === null) {
+      return ('vazio');
+    }
     return (
-      <aside>
-        {listAll.map((id) => <Category key={ id.id } id={ id.id } name={ id.name } />)}
-      </aside>
+      <>
+        Categorias:
+        <ul>
+          {listAll.map((id) => <Category key={ id.id } name={ id.name } />)}
+        </ul>
+      </>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from '../Components/Categories';
 
 class Home extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class Home extends React.Component {
   render() {
     const { query } = this.state;
     return (
-      <div>
+      <main>
+        <aside><Categories /></aside>
         <input
           value={ query }
           onChange={ this.handleChange }
@@ -26,7 +28,7 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-      </div>
+      </main>
     );
   }
 }
