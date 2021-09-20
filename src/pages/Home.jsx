@@ -1,5 +1,7 @@
 import React from 'react';
+import ProductCard from '../Components/ProductCard/ProductCard';
 import ProductList from '../Components/ProductList/ProductList';
+import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
@@ -7,11 +9,12 @@ class Home extends React.Component {
     super(props);
     this.state = {
       query: '',
-      categoria: '',
+      category: '',
       products: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchCategory = this.fetchCategory.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target: { value } }) {
@@ -26,17 +29,25 @@ class Home extends React.Component {
   }
 
   async fetchCategory() {
-    const { query, categoria } = this.state;
-    const products = await getProductsFromCategoryAndQuery(categoria, query);
-    // this.setState({
-    //   products,
-    //   query: '',
-    // });
-    console.log(products);
+    const { query, category } = this.state;
+    const products = await getProductsFromCategoryAndQuery(category, query);
+    this.setState({
+      products: products.results,
+      query: '',
+    });
+    console.log(products.results);
+  }
+
+  renderProducts() {
+    const { products } = this.state;
+    return products.map((product) => (<ProductCard
+      key={ product.id }
+      product={ product }
+    />));
   }
 
   render() {
-    const { query } = this.state;
+    const { query, products } = this.state;
     return (
       <div>
         <ProductList
@@ -44,6 +55,7 @@ class Home extends React.Component {
           query={ query }
           handleSubmit={ this.handleSubmit }
         />
+        {products !== [] ? this.renderProducts() : <ProductNotFound />}
       </div>
     );
   }
