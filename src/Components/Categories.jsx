@@ -6,32 +6,30 @@ class Categories extends React.Component {
   constructor() {
     super();
     this.state = {
-      listAll: null,
+      listAll: [],
     };
     this.handleApi = this.handleApi.bind(this);
   }
 
-  async componentDidMount() {
-    const allCategories = await getCategories();
-    this.handleApi(allCategories);
+  componentDidMount() {
+    this.handleApi();
   }
 
-  handleApi(result) {
-    const { listAll } = this.state;
+  async handleApi() {
+    const allCategories = await getCategories();
     this.setState({
-      listAll: result.PromiseResult });
+      listAll: allCategories });
   }
 
   render() {
     const { listAll } = this.state;
-    if (listAll === null) {
-      return ('vazio');
-    }
     return (
       <>
         Categorias:
         <ul>
-          {listAll.map((id) => <Category key={ id.id } name={ id.name } />)}
+          {listAll === []
+            ? null
+            : listAll.map((id) => <Category key={ id.id } name={ id.name } />)}
         </ul>
       </>
     );
