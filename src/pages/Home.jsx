@@ -22,10 +22,8 @@ class Home extends React.Component {
   }
 
   handleSubmit(event) {
-    const enterCode = event.code || event.key;
-    if (enterCode === 'Enter') {
-      this.fetchCategory();
-    }
+    event.preventDefault();
+    this.fetchCategory();
   }
 
   async fetchCategory() {
@@ -35,15 +33,13 @@ class Home extends React.Component {
       products: products.results,
       query: '',
     });
-    console.log(products.results);
   }
 
   renderProducts() {
     const { products } = this.state;
-    return products.map((product) => (<ProductCard
-      key={ product.id }
-      product={ product }
-    />));
+    return products.map((product) => (
+      <ProductCard key={ product.id } product={ product } />
+    ));
   }
 
   render() {

@@ -5,18 +5,19 @@ class SearchInput extends React.Component {
   render() {
     const { query, handleChange, handleSubmit } = this.props;
     return (
-      <div>
+      <form onSubmit={ handleSubmit }>
         <input
           value={ query }
           onChange={ handleChange }
-          onKeyPress={ handleSubmit }
+          data-testid="query-input"
         />
-        <p
-          data-testid="home-initial-message"
-        >
+        <button type="submit" data-testid="query-button">
+          Pesquisar
+        </button>
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-      </div>
+      </form>
     );
   }
 }
