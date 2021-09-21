@@ -50,21 +50,14 @@ class Home extends React.Component {
       <main>
         <aside><Categories /></aside>
         <div className="input-form">
-          <input
-            value={ query }
-            onChange={ this.handleChange }
-          />
-          <ButtonCart />
-        </div>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <div>
           <ProductList
             handleChange={ this.handleChange }
             query={ query }
             handleSubmit={ this.handleSubmit }
           />
+          <ButtonCart />
+        </div>
+        <div>
           {products !== [] ? this.renderProducts() : <ProductNotFound />}
         </div>
       </main>
