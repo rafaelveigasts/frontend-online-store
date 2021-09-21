@@ -3,6 +3,8 @@ import ProductCard from '../Components/ProductCard/ProductCard';
 import ProductList from '../Components/ProductList/ProductList';
 import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Categories from '../Components/Categories';
+import ButtonCart from '../Components/ButtonCart';
 
 class Home extends React.Component {
   constructor(props) {
@@ -45,15 +47,29 @@ class Home extends React.Component {
   render() {
     const { query, products } = this.state;
     return (
-      <div>
-        <ProductList
-          handleChange={ this.handleChange }
-          query={ query }
-          handleSubmit={ this.handleSubmit }
-        />
-        {products !== [] ? this.renderProducts() : <ProductNotFound />}
-      </div>
+      <main>
+        <aside><Categories /></aside>
+        <div className="input-form">
+          <input
+            value={ query }
+            onChange={ this.handleChange }
+          />
+          <ButtonCart />
+        </div>
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <div>
+          <ProductList
+            handleChange={ this.handleChange }
+            query={ query }
+            handleSubmit={ this.handleSubmit }
+          />
+          {products !== [] ? this.renderProducts() : <ProductNotFound />}
+        </div>
+      </main>
     );
   }
 }
+
 export default Home;
