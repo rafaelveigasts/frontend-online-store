@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import SearchInput from '../Components/SearchInput/SearchInput';
-import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
 import {
   getCategories,
   getProductsFromCategoryAndQuery,
@@ -51,18 +50,11 @@ class Home extends Component {
     }));
   }
 
-  renderProducts() {
-    const { products } = this.state;
-    return products.map((product) => (
-      <ProductCard key={ product.id } product={ product } />
-    ));
-  }
-
   render() {
-    const { products } = this.state;
+    const { products, categories } = this.state;
     return (
-      <main>
-        <Categories state={ this.state } />
+      <>
+        <Categories categories={ categories } />
         <header>
           <div className="input-form">
             <SearchInput
@@ -73,10 +65,10 @@ class Home extends Component {
           </div>
           <ButtonCart />
         </header>
-        <div>
-          {products !== [] ? this.renderProducts() : <ProductNotFound />}
-        </div>
-      </main>
+        <main>
+          <ProductCard products={ products } />
+        </main>
+      </>
     );
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function SearchInput(props) {
   const {
-    state: { query },
+    state: { query, products },
     handleChange,
     handleSubmit,
   } = props;
@@ -18,15 +18,20 @@ export default function SearchInput(props) {
       <button type="submit" data-testid="query-button">
         Pesquisar
       </button>
-      <p data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
+      {products.length === 0 && (
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+      )}
     </form>
   );
 }
 
 SearchInput.propTypes = {
+  state: PropTypes.shape({
+    query: PropTypes.string,
+    products: PropTypes.arrayOf(),
+  }),
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
-  query: PropTypes.string,
 }.isRequired;
