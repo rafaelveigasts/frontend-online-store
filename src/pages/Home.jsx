@@ -60,7 +60,7 @@ class Home extends Component {
           <div className="input-form">
             <SearchInput
               handleChange={ this.handleChange }
-              state={ this.state }
+              stateHome={ this.state }
               handleSubmit={ this.handleSubmit }
             />
           </div>
