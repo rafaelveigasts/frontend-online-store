@@ -7,7 +7,7 @@ export default function Categories(props) {
     return null;
   }
   return (
-    <aside>
+    <aside className="menu-categories">
       Categorias:
       <ul>
         {categories.map((category) => (
