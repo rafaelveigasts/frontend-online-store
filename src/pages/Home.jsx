@@ -15,7 +15,7 @@ class Home extends Component {
       query: '',
       categories: [],
       products: [],
-      selectedCategory: {},
+      selectedCategory: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
@@ -28,8 +28,12 @@ class Home extends Component {
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState(() => ({ [name]: value }));
+    const { name, type, value, id } = event.target;
+    if (type === 'button') {
+      this.setState(() => ({ [name]: id }));
+    } else {
+      this.setState(() => ({ [name]: value }));
+    }
   }
 
   handleSubmit(event) {
@@ -44,7 +48,10 @@ class Home extends Component {
 
   async fetchProducts() {
     const { query, selectedCategory } = this.state;
-    const products = await getProductsFromCategoryAndQuery(selectedCategory, query);
+    const products = await getProductsFromCategoryAndQuery(
+      selectedCategory,
+      query,
+    );
     this.setState(() => ({
       products: products.results,
       query: '',
@@ -55,7 +62,7 @@ class Home extends Component {
     const { products, categories } = this.state;
     return (
       <>
-        <Categories categories={ categories } />
+        <Categories categories={ categories } handleChange={ this.handleChange } />
         <header>
           <div className="input-form">
             <SearchInput
