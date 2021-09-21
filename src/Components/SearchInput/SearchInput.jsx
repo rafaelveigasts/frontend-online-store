@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function SearchInput(props) {
   const {
-    state: { query, products },
+    stateHome: { query, products },
     handleChange,
     handleSubmit,
   } = props;
@@ -28,7 +28,7 @@ export default function SearchInput(props) {
 }
 
 SearchInput.propTypes = {
-  state: PropTypes.shape({
+  stateHome: PropTypes.shape({
     query: PropTypes.string,
     products: PropTypes.arrayOf(),
   }),
