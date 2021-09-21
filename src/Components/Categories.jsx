@@ -1,39 +1,25 @@
 import React from 'react';
-import { getCategories } from '../services/api';
+import PropTypes from 'prop-types';
 import Category from './Category';
 
-class Categories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      listAll: [],
-    };
-    this.handleApi = this.handleApi.bind(this);
-  }
-
-  componentDidMount() {
-    this.handleApi();
-  }
-
-  async handleApi() {
-    const allCategories = await getCategories();
-    this.setState({
-      listAll: allCategories });
-  }
-
-  render() {
-    const { listAll } = this.state;
-    return (
-      <aside>
-        Categorias:
-        <ul>
-          {listAll === []
-            ? null
-            : listAll.map((id) => <Category key={ id.id } name={ id.name } />)}
-        </ul>
-      </aside>
-    );
-  }
+export default function Categories(props) {
+  const {
+    state: { categories },
+  } = props;
+  return (
+    <aside>
+      Categorias:
+      <ul>
+        {categories === []
+          ? null
+          : categories.map((id) => <Category key={ id.id } name={ id.name } />)}
+      </ul>
+    </aside>
+  );
 }
 
-export default Categories;
+Categories.propTypes = {
+  state: PropTypes.shape({
+    categories: PropTypes.string,
+  }).isRequired,
+};

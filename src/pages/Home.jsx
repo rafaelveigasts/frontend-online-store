@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 import Categories from '../Components/Categories';
 import ButtonCart from '../Components/ButtonCart';
 
@@ -11,12 +14,17 @@ class Home extends Component {
     super(props);
     this.state = {
       query: '',
-      categories: '',
+      categories: [],
       products: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchCategories();
   }
 
   handleChange(event) {
@@ -27,6 +35,11 @@ class Home extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.fetchProducts();
+  }
+
+  async fetchCategories() {
+    const categories = await getCategories();
+    this.setState(() => ({ categories }));
   }
 
   async fetchProducts() {
@@ -49,7 +62,7 @@ class Home extends Component {
     const { products } = this.state;
     return (
       <main>
-        <Categories />
+        <Categories state={ this.state } />
         <div className="input-form">
           <SearchInput
             handleChange={ this.handleChange }
