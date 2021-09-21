@@ -6,8 +6,8 @@ import {
   getCategories,
   getProductsFromCategoryAndQuery,
 } from '../services/api';
-import Categories from '../Components/Categories';
-import ButtonCart from '../Components/ButtonCart';
+import Categories from '../Components/Categories/Categories';
+import ButtonCart from '../Components/ButtonCart/ButtonCart';
 
 class Home extends Component {
   constructor(props) {
