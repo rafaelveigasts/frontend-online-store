@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from '../Components/Categories';
 import ButtonCart from '../Components/ButtonCart';
 
 class Home extends React.Component {
@@ -17,7 +18,8 @@ class Home extends React.Component {
   render() {
     const { query } = this.state;
     return (
-      <div>
+      <main>
+        <aside><Categories /></aside>
         <div className="input-form">
           <input
             value={ query }
@@ -28,7 +30,7 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-      </div>
+      </main>
     );
   }
 }
