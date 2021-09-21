@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ProductCard from '../Components/ProductCard/ProductCard';
-import ProductList from '../Components/ProductList/ProductList';
+import SearchInput from '../Components/SearchInput/SearchInput';
 import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../Components/Categories';
@@ -32,10 +32,10 @@ class Home extends Component {
   async fetchProducts() {
     const { query, categories } = this.state;
     const products = await getProductsFromCategoryAndQuery(categories, query);
-    this.setState({
+    this.setState(() => ({
       products: products.results,
       query: '',
-    });
+    }));
   }
 
   renderProducts() {
@@ -46,16 +46,16 @@ class Home extends Component {
   }
 
   render() {
-    const { query, products } = this.state;
+    const { products } = this.state;
     return (
       <main>
         <aside>
           <Categories />
         </aside>
         <div className="input-form">
-          <ProductList
+          <SearchInput
             handleChange={ this.handleChange }
-            query={ query }
+            state={ this.state }
             handleSubmit={ this.handleSubmit }
           />
           <ButtonCart />
