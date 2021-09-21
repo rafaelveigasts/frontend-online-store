@@ -8,11 +8,11 @@ export default function ProductCard(props) {
     return <ProductNotFound />;
   }
   return products.map(({ title, thumbnail, price, id }) => (
-    <section data-testid="product" key={ id }>
+    <div data-testid="product" key={ id } className="product">
       <p>{title}</p>
-      <img src={ thumbnail } alt={ title } />
+      <img width="100px" src={ thumbnail } alt={ title } />
       <p>{price}</p>
-    </section>
+    </div>
   ));
 }
 

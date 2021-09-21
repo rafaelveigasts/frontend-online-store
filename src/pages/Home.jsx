@@ -7,6 +7,7 @@ import {
 } from '../services/api';
 import Categories from '../Components/Categories/Categories';
 import ButtonCart from '../Components/ButtonCart/ButtonCart';
+import './home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Home extends Component {
     if (type === 'button') {
       this.setState({ [name]: id }, () => this.fetchProducts());
     } else {
-      this.setState(() => ({ [name]: value }));
+      this.setState({ [name]: value });
     }
   }
 
@@ -43,7 +44,7 @@ class Home extends Component {
 
   async fetchCategories() {
     const categories = await getCategories();
-    this.setState(() => ({ categories }));
+    this.setState({ categories });
   }
 
   async fetchProducts() {
@@ -52,17 +53,14 @@ class Home extends Component {
       selectedCategory,
       query,
     );
-    this.setState(() => ({
-      products: products.results,
-    }));
+    this.setState({ products: products.results });
   }
 
   render() {
     const { products, categories } = this.state;
     return (
-      <>
-        <Categories categories={ categories } handleChange={ this.handleChange } />
-        <header>
+      <div className="home-page">
+        <header className="header-home-page">
           <div className="input-form">
             <SearchInput
               handleChange={ this.handleChange }
@@ -72,10 +70,13 @@ class Home extends Component {
           </div>
           <ButtonCart />
         </header>
-        <main>
-          <ProductCard products={ products } />
+        <main className="main-content">
+          <Categories categories={ categories } handleChange={ this.handleChange } />
+          <section className="container-products">
+            <ProductCard products={ products } />
+          </section>
         </main>
-      </>
+      </div>
     );
   }
 }
