@@ -30,8 +30,7 @@ class Home extends Component {
   async handleChange(event) {
     const { name, type, value, id } = event.target;
     if (type === 'button') {
-      this.setState(() => ({ [name]: id }));
-      await this.fetchProducts();
+      this.setState({ [name]: id }, () => this.fetchProducts());
     } else {
       this.setState(() => ({ [name]: value }));
     }
