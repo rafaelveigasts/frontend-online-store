@@ -15,6 +15,7 @@ class Home extends Component {
       query: '',
       categories: [],
       products: [],
+      selectedCategory: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
@@ -42,8 +43,8 @@ class Home extends Component {
   }
 
   async fetchProducts() {
-    const { query, categories } = this.state;
-    const products = await getProductsFromCategoryAndQuery(categories, query);
+    const { query, selectedCategory } = this.state;
+    const products = await getProductsFromCategoryAndQuery(selectedCategory, query);
     this.setState(() => ({
       products: products.results,
       query: '',
