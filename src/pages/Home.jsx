@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonCart from '../Components/ButtonCart';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,13 +18,14 @@ class Home extends React.Component {
     const { query } = this.state;
     return (
       <div>
-        <input
-          value={ query }
-          onChange={ this.handleChange }
-        />
-        <p
-          data-testid="home-initial-message"
-        >
+        <div className="input-form">
+          <input
+            value={ query }
+            onChange={ this.handleChange }
+          />
+          <ButtonCart />
+        </div>
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       </div>
