@@ -1,66 +1,75 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProductCard from '../Components/ProductCard/ProductCard';
-import ProductList from '../Components/ProductList/ProductList';
-import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Categories from '../Components/Categories';
-import ButtonCart from '../Components/ButtonCart';
+import SearchInput from '../Components/SearchInput/SearchInput';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
+import Categories from '../Components/Categories/Categories';
+import ButtonCart from '../Components/ButtonCart/ButtonCart';
 
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       query: '',
-      category: '',
+      categories: [],
       products: [],
+      selectedCategory: {},
     };
     this.handleChange = this.handleChange.bind(this);
-    this.fetchCategory = this.fetchCategory.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange({ target: { value } }) {
-    this.setState({ query: value });
+  componentDidMount() {
+    this.fetchCategories();
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState(() => ({ [name]: value }));
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fetchCategory();
+    this.fetchProducts();
   }
 
-  async fetchCategory() {
-    const { query, category } = this.state;
-    const products = await getProductsFromCategoryAndQuery(category, query);
-    this.setState({
+  async fetchCategories() {
+    const categories = await getCategories();
+    this.setState(() => ({ categories }));
+  }
+
+  async fetchProducts() {
+    const { query, selectedCategory } = this.state;
+    const products = await getProductsFromCategoryAndQuery(selectedCategory, query);
+    this.setState(() => ({
       products: products.results,
       query: '',
-    });
-  }
-
-  renderProducts() {
-    const { products } = this.state;
-    return products.map((product) => (
-      <ProductCard key={ product.id } product={ product } />
-    ));
+    }));
   }
 
   render() {
-    const { query, products } = this.state;
+    const { products, categories } = this.state;
     return (
-      <main>
-        <aside><Categories /></aside>
-        <div className="input-form">
-          <ProductList
-            handleChange={ this.handleChange }
-            query={ query }
-            handleSubmit={ this.handleSubmit }
-          />
+      <>
+        <Categories categories={ categories } />
+        <header>
+          <div className="input-form">
+            <SearchInput
+              handleChange={ this.handleChange }
+              stateHome={ this.state }
+              handleSubmit={ this.handleSubmit }
+            />
+          </div>
           <ButtonCart />
-        </div>
-        <div>
-          {products !== [] ? this.renderProducts() : <ProductNotFound />}
-        </div>
-      </main>
+        </header>
+        <main>
+          <ProductCard products={ products } />
+        </main>
+      </>
     );
   }
 }
