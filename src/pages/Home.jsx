@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import ProductList from '../Components/ProductList/ProductList';
 import ProductNotFound from '../Components/ProductNotFound/ProductNotFound';
@@ -6,7 +6,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from '../Components/Categories';
 import ButtonCart from '../Components/ButtonCart';
 
-class Home extends React.Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,8 +19,9 @@ class Home extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange({ target: { value } }) {
-    this.setState({ query: value });
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit(event) {
@@ -48,7 +49,9 @@ class Home extends React.Component {
     const { query, products } = this.state;
     return (
       <main>
-        <aside><Categories /></aside>
+        <aside>
+          <Categories />
+        </aside>
         <div className="input-form">
           <ProductList
             handleChange={ this.handleChange }
