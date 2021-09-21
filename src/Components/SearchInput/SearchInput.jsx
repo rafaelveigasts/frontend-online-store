@@ -7,6 +7,7 @@ class SearchInput extends React.Component {
     return (
       <form onSubmit={ handleSubmit }>
         <input
+          name="query"
           value={ query }
           onChange={ handleChange }
           data-testid="query-input"
