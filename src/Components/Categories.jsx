@@ -24,14 +24,14 @@ class Categories extends React.Component {
   render() {
     const { listAll } = this.state;
     return (
-      <>
+      <aside>
         Categorias:
         <ul>
           {listAll === []
             ? null
             : listAll.map((id) => <Category key={ id.id } name={ id.name } />)}
         </ul>
-      </>
+      </aside>
     );
   }
 }

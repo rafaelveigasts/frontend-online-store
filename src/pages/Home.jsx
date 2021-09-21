@@ -49,9 +49,7 @@ class Home extends Component {
     const { products } = this.state;
     return (
       <main>
-        <aside>
-          <Categories />
-        </aside>
+        <Categories />
         <div className="input-form">
           <SearchInput
             handleChange={ this.handleChange }
