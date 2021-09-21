@@ -73,7 +73,9 @@ class Home extends Component {
         <main className="main-content">
           <Categories categories={ categories } handleChange={ this.handleChange } />
           <section className="container-products">
-            <ProductCard products={ products } />
+            <ProductCard
+              products={ products }
+            />
           </section>
         </main>
       </div>
