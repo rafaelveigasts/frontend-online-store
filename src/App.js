@@ -11,11 +11,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route
-              path="/product/:id"
-              props
-              render={ (props) => <ProductDetails { ...props } /> }
-            />
+            <Route path="/product-details" component={ ProductDetails } />
             <Route path="/cart" component={ Cart } />
             <Route exact path="/" component={ Home } />
           </Switch>

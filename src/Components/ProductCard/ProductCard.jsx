@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ProductNotFound from '../ProductNotFound/ProductNotFound';
 
 export default function ProductCard(props) {
-  const { products } = props;
+  const { products, handleClick } = props;
   if (products.length === []) {
     return <ProductNotFound />;
   }
@@ -14,13 +14,18 @@ export default function ProductCard(props) {
       key={ product.id }
       value={ product.title }
       onClick={ () => {
-        console.log(product);
+        handleClick(product);
       } }
     >
       <div data-testid="product" className="product">
         <p>{product.title}</p>
         <img width="100px" src={ product.thumbnail } alt={ product.title } />
-        <p>{product.price}</p>
+        <p>
+          {new Intl.NumberFormat('pr-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(product.price)}
+        </p>
       </div>
     </button>
   ));
