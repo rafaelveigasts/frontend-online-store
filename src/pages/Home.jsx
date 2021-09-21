@@ -27,10 +27,11 @@ class Home extends Component {
     this.fetchCategories();
   }
 
-  handleChange(event) {
+  async handleChange(event) {
     const { name, type, value, id } = event.target;
     if (type === 'button') {
       this.setState(() => ({ [name]: id }));
+      await this.fetchProducts();
     } else {
       this.setState(() => ({ [name]: value }));
     }
@@ -54,7 +55,6 @@ class Home extends Component {
     );
     this.setState(() => ({
       products: products.results,
-      query: '',
     }));
   }
 
