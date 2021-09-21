@@ -63,14 +63,16 @@ class Home extends Component {
     return (
       <main>
         <Categories state={ this.state } />
-        <div className="input-form">
-          <SearchInput
-            handleChange={ this.handleChange }
-            state={ this.state }
-            handleSubmit={ this.handleSubmit }
-          />
+        <header>
+          <div className="input-form">
+            <SearchInput
+              handleChange={ this.handleChange }
+              state={ this.state }
+              handleSubmit={ this.handleSubmit }
+            />
+          </div>
           <ButtonCart />
-        </div>
+        </header>
         <div>
           {products !== [] ? this.renderProducts() : <ProductNotFound />}
         </div>
