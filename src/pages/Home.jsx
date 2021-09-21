@@ -1,5 +1,6 @@
 import React from 'react';
 import Categories from '../Components/Categories';
+import ButtonCart from '../Components/ButtonCart';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,13 +20,14 @@ class Home extends React.Component {
     return (
       <main>
         <aside><Categories /></aside>
-        <input
-          value={ query }
-          onChange={ this.handleChange }
-        />
-        <p
-          data-testid="home-initial-message"
-        >
+        <div className="input-form">
+          <input
+            value={ query }
+            onChange={ this.handleChange }
+          />
+          <ButtonCart />
+        </div>
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
       </main>
