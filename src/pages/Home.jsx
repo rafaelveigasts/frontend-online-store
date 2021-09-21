@@ -15,7 +15,7 @@ class Home extends Component {
       products: [],
     };
     this.handleChange = this.handleChange.bind(this);
-    this.fetchCategory = this.fetchCategory.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -26,10 +26,10 @@ class Home extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.fetchCategory();
+    this.fetchProducts();
   }
 
-  async fetchCategory() {
+  async fetchProducts() {
     const { query, category } = this.state;
     const products = await getProductsFromCategoryAndQuery(category, query);
     this.setState({
