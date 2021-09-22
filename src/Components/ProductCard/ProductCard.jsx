@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProductNotFound from '../ProductNotFound/ProductNotFound';
+import '../../pages/home.css';
 
 export default function ProductCard(props) {
   const { products, handleClick } = props;
@@ -20,7 +21,7 @@ export default function ProductCard(props) {
     >
       <div data-testid="product" className="product">
         <p>{product.title}</p>
-        <img width="100px" src={ product.thumbnail } alt={ product.title } />
+        <img width="100px" src={ product.thumbnail } alt={ product.title } className="image-product" />
         <p>
           {new Intl.NumberFormat('pr-BR', {
             style: 'currency',

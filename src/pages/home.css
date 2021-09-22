@@ -21,13 +21,23 @@
 .container-products {
   display: flex;
   flex-flow: row wrap;
-  padding: 1em;
-  width: 80%;
+  width: 90%;
+}
+
+.product-card {
+  background-color: white;
+  width: 20%;
+  height: 20em;
+  justify-content: space-between;
 }
 
 .product {
-  background: pink;
+  background: white;
   margin: 0.5em 1em;
   text-align: center;
-  width: 20%;
+}
+
+.image-product {
+  width: 80%;
+
 }
