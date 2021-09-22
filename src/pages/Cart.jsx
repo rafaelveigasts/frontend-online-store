@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import ProductCart from '../Components/ProductCart/ProductCart';
 
 class Cart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.importFromStorage = this.importFromStorage.bind(this);
     this.mapProducts = this.mapProducts.bind(this);
