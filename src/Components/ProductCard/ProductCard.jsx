@@ -9,6 +9,7 @@ export default function ProductCard(props) {
   }
   return products.map((product) => (
     <button
+      data-testid="product-detail-link"
       className="product-card"
       type="button"
       key={ product.id }
