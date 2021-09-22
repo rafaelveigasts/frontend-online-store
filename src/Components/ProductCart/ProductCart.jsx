@@ -5,16 +5,14 @@ import './productCart.css';
 class ProductCart extends Component {
   constructor(props) {
     super(props);
-
-    // this.addOrDecreaseProduct = this.addOrDecreaseProduct.bind(this);
-    this.addProduct = this.addProduct.bind(this);
-    this.rmProduct = this.rmProduct.bind(this);
-    this.handlePrice = this.handlePrice.bind(this);
-    this.multiplyPrice = this.multiplyPrice.bind(this);
     this.state = {
       numberProductsCart: 1,
       totalPrice: 0,
     };
+    this.productIncreaseQuantity = this.productIncreaseQuantity.bind(this);
+    this.productDecreaseQuantity = this.productDecreaseQuantity.bind(this);
+    this.handlePrice = this.handlePrice.bind(this);
+    this.multiplyPrice = this.multiplyPrice.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +26,7 @@ class ProductCart extends Component {
     this.setState({ totalPrice: price });
   }
 
-  addProduct(event) {
-    const { numberProductsCart } = this.state;
+  productIncreaseQuantity() {
     this.setState(
       (_prevState) => ({
         numberProductsCart: _prevState.numberProductsCart + 1,
@@ -40,7 +37,7 @@ class ProductCart extends Component {
     );
   }
 
-  rmProduct(event) {
+  productDecreaseQuantity() {
     const { numberProductsCart } = this.state;
     this.setState(
       (_prevState) => ({
@@ -48,29 +45,11 @@ class ProductCart extends Component {
       }),
       () => {
         if (numberProductsCart <= 0) return this.setState({ numberProductsCart: 0 });
+        // Talvez seja interessante chamar a função removeProduct quando a quantidade for zero;
         this.multiplyPrice();
       },
     );
   }
-
-  // addOrDecreaseProduct({ target }) {
-  //   const { numberProductsCart } = this.state;
-  //   if (target.innerText === '-') {
-  //     this.setState((_prevState) => (
-  //       { numberProductsCart: _prevState.numberProductsCart - 1 }
-  //     ),
-  //     () => {
-  //       if (numberProductsCart <= 0) return this.setState({ numberProductsCart: 0 });
-  //       this.multiplyPrice();
-  //     });
-  //   } else {
-  //     this.setState((_prevState) => (
-  //       { numberProductsCart: _prevState.numberProductsCart + 1 }
-  //     ), () => {
-  //       this.multiplyPrice();
-  //     });
-  //   }
-  // }
 
   multiplyPrice() {
     const { numberProductsCart } = this.state;
@@ -110,7 +89,7 @@ class ProductCart extends Component {
             type="button"
             className="btn-product btn-decrease"
             data-testid="product-decrease-quantity"
-            onClick={ this.rmProduct }
+            onClick={ this.productDecreaseQuantity }
           >
             -
           </button>
@@ -124,7 +103,7 @@ class ProductCart extends Component {
             type="button"
             className="btn-product btn-add"
             data-testid="product-increase-quantity"
-            onClick={ this.addProduct }
+            onClick={ this.productIncreaseQuantity }
           >
             +
           </button>
