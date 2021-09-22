@@ -42,8 +42,8 @@ class ProductCart extends Component {
         <section className="body-product">
           <img width="150px" src={ thumbnail } alt={ `Imagem do produto ${title}` } />
         </section>
-        <section className="product-name" data-testid="shopping-cart-product-name">
-          <p>{ title }</p>
+        <section className="product-name">
+          <p data-testid="shopping-cart-product-name">{ title }</p>
         </section>
         <section className="add-product-body">
           <button
@@ -54,7 +54,10 @@ class ProductCart extends Component {
           >
             -
           </button>
-          <div className="number-products-cart" data-testid="shopping-cart-product-quantity">
+          <div
+            className="number-products-cart"
+            data-testid="shopping-cart-product-quantity"
+          >
             { numberProductsCart }
           </div>
           <button
@@ -78,8 +81,10 @@ ProductCart.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
+  removeProduct: PropTypes.func.isRequired,
 };
 
 export default ProductCart;

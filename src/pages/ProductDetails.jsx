@@ -1,4 +1,6 @@
 import React from 'react';
+import AddToCart from '../Components/AddToCart/AddToCart';
+import ButtonCart from '../Components/ButtonCart/ButtonCart';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -22,19 +24,28 @@ class ProductDetails extends React.Component {
 
   render() {
     const {
-      product: { title, thumbnail, price },
+      product: { title, thumbnail, price }, product,
     } = this.state;
     return (
-      <div data-testid="product-detail-name">
-        <p>{title}</p>
-        <img width="100px" src={ thumbnail } alt={ title } />
-        <p>
-          {new Intl.NumberFormat('pr-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          }).format(price)}
-        </p>
-      </div>
+      <main className="product-details-page">
+        <header className="header-product-details">
+          <ButtonCart />
+        </header>
+        <div data-testid="product-detail-name">
+          <p>{title}</p>
+          <img width="100px" src={ thumbnail } alt={ title } />
+          <p>
+            {new Intl.NumberFormat('pr-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(price)}
+          </p>
+          <AddToCart
+            selectedProduct={ product }
+            dataTestId="product-detail-add-to-cart"
+          />
+        </div>
+      </main>
     );
   }
 }
