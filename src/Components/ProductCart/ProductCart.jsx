@@ -7,9 +7,21 @@ class ProductCart extends Component {
     super();
 
     this.addOrDecreaseProduct = this.addOrDecreaseProduct.bind(this);
+    this.handlePrice = this.handlePrice.bind(this);
+    this.multiplyPrice = this.multiplyPrice.bind(this);
     this.state = {
       numberProductsCart: 1,
+      totalPrice: 0,
     };
+  }
+
+  componentDidMount() {
+    this.handlePrice();
+  }
+
+  handlePrice() {
+    const { product: { price } } = this.props;
+    this.setState({ totalPrice: price });
   }
 
   addOrDecreaseProduct({ target }) {
@@ -17,19 +29,31 @@ class ProductCart extends Component {
     if (target.innerText === '-') {
       this.setState((_prevState) => (
         { numberProductsCart: _prevState.numberProductsCart - 1 }
-      ), () => {
-        if (numberProductsCart <= 1) return this.setState({ numberProductsCart: 1 });
+      ),
+      () => {
+        if (numberProductsCart <= 0) return this.setState({ numberProductsCart: 0 });
+        this.multiplyPrice();
       });
     } else {
       this.setState((_prevState) => (
         { numberProductsCart: _prevState.numberProductsCart + 1 }
-      ));
+      ), () => {
+        this.multiplyPrice();
+      });
     }
   }
 
+  multiplyPrice() {
+    const { numberProductsCart } = this.state;
+    const { product: { price } } = this.props;
+    this.setState({ totalPrice: numberProductsCart * price });
+  }
+
   render() {
-    const { props: { product, removeProduct }, state: { numberProductsCart } } = this;
-    const { title, thumbnail, price, id } = product;
+    const {
+      props: { product, removeProduct },
+      state: { numberProductsCart, totalPrice } } = this;
+    const { title, thumbnail, id } = product;
     return (
       <div className="product-cart-body" id={ id }>
         <button
@@ -54,12 +78,12 @@ class ProductCart extends Component {
           >
             -
           </button>
-          <div
+          <p
             className="number-products-cart"
             data-testid="shopping-cart-product-quantity"
           >
             { numberProductsCart }
-          </div>
+          </p>
           <button
             type="button"
             className="btn-product btn-add"
@@ -70,7 +94,7 @@ class ProductCart extends Component {
           </button>
         </section>
         <section className="price-body">
-          { `R$ ${price}` }
+          { `R$ ${totalPrice}` }
         </section>
       </div>
     );

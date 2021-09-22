@@ -47,9 +47,9 @@ class Cart extends Component {
 
   mapProducts() {
     const { shoppingCart } = this.state;
-    return shoppingCart.map((product, index) => (
+    return shoppingCart.map((product) => (
       <ProductCart
-        key={ index }
+        key={ product.id }
         product={ product }
         removeProduct={ this.removeProduct }
       />
