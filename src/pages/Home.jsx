@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import {
@@ -17,11 +18,13 @@ class Home extends Component {
       categories: [],
       products: [],
       selectedCategory: '',
+      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -42,6 +45,11 @@ class Home extends Component {
     this.fetchProducts();
   }
 
+  handleClick(product) {
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    this.setState({ redirect: true });
+  }
+
   async fetchCategories() {
     const categories = await getCategories();
     this.setState({ categories });
@@ -57,7 +65,10 @@ class Home extends Component {
   }
 
   render() {
-    const { products, categories } = this.state;
+    const { products, categories, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/product-details" />;
+    }
     return (
       <div className="home-page">
         <header className="header-home-page">
@@ -71,9 +82,12 @@ class Home extends Component {
           <ButtonCart />
         </header>
         <main className="main-content">
-          <Categories categories={ categories } handleChange={ this.handleChange } />
+          <Categories
+            categories={ categories }
+            handleChange={ this.handleChange }
+          />
           <section className="container-products">
-            <ProductCard products={ products } />
+            <ProductCard products={ products } handleClick={ this.handleClick } />
           </section>
         </main>
       </div>
