@@ -12,10 +12,6 @@ class ProductCart extends Component {
     };
   }
 
-  removeProduct({ target }) {
-    target.parentNode.parentNode.removeChild(target.parentNode);
-  }
-
   addOrDecreaseProduct({ target }) {
     const { numberProductsCart } = this.state;
     if (target.innerText === '-') {
@@ -32,21 +28,21 @@ class ProductCart extends Component {
   }
 
   render() {
-    const { props: { product }, state: { numberProductsCart } } = this;
-    const { title, thumbnail, price } = product;
+    const { props: { product, removeProduct }, state: { numberProductsCart } } = this;
+    const { title, thumbnail, price, id } = product;
     return (
-      <div className="product-cart-body">
+      <div className="product-cart-body" id={ id }>
         <button
           type="button"
           className="button-remove-product"
-          onClick={ this.removeProduct }
+          onClick={ removeProduct }
         >
           X
         </button>
         <section className="body-product">
           <img width="150px" src={ thumbnail } alt={ `Imagem do produto ${title}` } />
         </section>
-        <section className="product-name">
+        <section className="product-name" data-testid="shopping-cart-product-name">
           <p>{ title }</p>
         </section>
         <section className="add-product-body">
@@ -58,7 +54,7 @@ class ProductCart extends Component {
           >
             -
           </button>
-          <div className="number-products-cart">
+          <div className="number-products-cart" data-testid="shopping-cart-product-quantity">
             { numberProductsCart }
           </div>
           <button
