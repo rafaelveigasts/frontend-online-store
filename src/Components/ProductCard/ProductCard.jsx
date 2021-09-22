@@ -27,7 +27,7 @@ export default function ProductCard(props) {
           alt={ product.title }
           className="image-product"
         />
-        <p>
+        <p className="p-price">
           {new Intl.NumberFormat('pr-BR', {
             style: 'currency',
             currency: 'BRL',

@@ -75,3 +75,20 @@ button.product-card{
 li{
   list-style-type: none;
 }
+
+.input-search{
+  border: 1px solid black;
+  border-radius: 25px;
+  width: 300px;
+  height: 25px;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+p.product-title{
+  font-size: 1.1em;
+}
+
+.p-price{
+  font-size: 1.1em;
+}
