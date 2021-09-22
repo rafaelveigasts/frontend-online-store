@@ -30,7 +30,10 @@ export default function ProductCard(props) {
           </p>
         </div>
       </button>
-      <AddTocart selectedProduct={ product } />
+      <AddTocart
+        selectedProduct={ product }
+        dataTestId="product-add-to-cart"
+      />
     </div>
   ));
 }

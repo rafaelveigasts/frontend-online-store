@@ -12,10 +12,10 @@ function addToStorage(selectedProduct) {
 }
 
 export default function AddToCart(props) {
-  const { selectedProduct } = props;
+  const { selectedProduct, dataTestId } = props;
   return (
     <button
-      data-testid="product-detail-add-to-cart"
+      data-testid={ dataTestId }
       type="button"
       onClick={ () => {
         addToStorage(selectedProduct);
