@@ -1,5 +1,5 @@
 .home-page {
-  background: silver;
+  background: #ebebeb;
 }
 
 .input-form {
@@ -16,19 +16,29 @@
 .menu-categories {
   padding: 1em;
   width: 20%;
+  border: none;
 }
 
 .container-products {
   display: flex;
   flex-flow: row wrap;
   width: 90%;
+  height: 100%;
+  justify-content: space-evenly;
+  align-content: space-between;
+  
 }
 
 .product-card {
   background-color: white;
-  width: 20%;
+  width: 18%;
   height: 20em;
-  justify-content: space-between;
+  border: none;
+  padding: 0;
+}
+
+p.product-title{
+  text-align: center;
 }
 
 .product {
@@ -39,5 +49,29 @@
 
 .image-product {
   width: 80%;
+}
 
+aside{
+  text-decoration: none;
+}
+
+button.product-card{
+  margin: 8px;
+}
+
+.input-aside{
+  padding: 4px;
+  border: none;
+  background: #ebebeb;
+  width: 100%;
+  text-align: left;
+}
+
+.input-aside:hover{
+  background: rgb(97, 97, 97);
+  color: white;
+}
+
+li{
+  list-style-type: none;
 }

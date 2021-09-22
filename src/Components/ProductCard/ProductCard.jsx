@@ -20,8 +20,13 @@ export default function ProductCard(props) {
       } }
     >
       <div data-testid="product" className="product">
-        <p>{product.title}</p>
-        <img width="100px" src={ product.thumbnail } alt={ product.title } className="image-product" />
+        <p className="product-title">{product.title}</p>
+        <img
+          width="100px"
+          src={ product.thumbnail }
+          alt={ product.title }
+          className="image-product"
+        />
         <p>
           {new Intl.NumberFormat('pr-BR', {
             style: 'currency',
