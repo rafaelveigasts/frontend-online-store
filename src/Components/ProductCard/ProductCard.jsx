@@ -23,6 +23,7 @@ export default function ProductCard(props) {
         className={ button }
         type="button"
         value={ product.title }
+        data-testid="product-detail-link"
         onClick={ () => {
           handleClick(product);
         } }
