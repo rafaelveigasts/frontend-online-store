@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import ProductNotFound from '../ProductNotFound/ProductNotFound';
 import AddTocart from '../AddToCart/AddToCart';
 import '../../pages/home.css';
+import {
+  container,
+  button,
+  h2,
+  imageContainer,
+  image,
+  p,
+} from './ProductCardClassName';
 
 export default function ProductCard(props) {
   const { products, handleClick } = props;
@@ -10,15 +18,9 @@ export default function ProductCard(props) {
     return <ProductNotFound />;
   }
   return products.map((product) => (
-    <div
-      className="flex flex-col content-around max-w-sm
-      rounded overflow-hidden shadow-lg w-64 h-72 justify-around"
-      key={ product.id }
-    >
+    <div className={ container } key={ product.id }>
       <button
-        className="flex flex-col content-around max-w-sm rounded
-        overflow-hidden shadow-lg w-64 h-72 justify-around"
-        data-testid="product-detail-link"
+        className={ button }
         type="button"
         value={ product.title }
         onClick={ () => {
@@ -26,20 +28,15 @@ export default function ProductCard(props) {
         } }
       >
         <div data-testid="product">
-          <h2
-            className="sm:text-sm sm:leading-snug font-semibold
-          tracking-wide uppercase text-grey-600 mb-3"
-          >
-            {product.title}
-          </h2>
-          <div className="flex justify-center">
+          <h2 className={ h2 }>{product.title}</h2>
+          <div className={ imageContainer }>
             <img
-              className="w-24 object-center"
+              className={ image }
               src={ product.thumbnail }
               alt={ product.title }
             />
           </div>
-          <p className="justify-self-end">
+          <p className={ p }>
             {new Intl.NumberFormat('pr-BR', {
               style: 'currency',
               currency: 'BRL',

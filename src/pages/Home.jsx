@@ -9,6 +9,7 @@ import {
 import Categories from '../Components/Categories/Categories';
 import ButtonCart from '../Components/ButtonCart/ButtonCart';
 // import './home.css';
+import { homeContainer, header, formContainer, initialMessage } from './HomeClassName';
 
 class Home extends Component {
   constructor(props) {
@@ -74,14 +75,10 @@ class Home extends Component {
       return <Redirect to="/product-details" />;
     }
     return (
-      <div
-        className="space-y-5 sm:space-y-8 md:space-y-10
-      lg:space-y-11 overflow-hidden"
-      >
-        <header className="relative z-10 max-w-screen-lg xl:max-w-screen-xl mx-auto">
+      <div className={ homeContainer }>
+        <header className={ header }>
           <div
-            className="border-b border-gray-200 py-4 flex items-center
-          justify-between -mx-4 px-4 sm:mx-0 sm:px-0"
+            className={ formContainer }
           >
             <SearchInput
               handleChange={ this.handleChange }
@@ -99,7 +96,7 @@ class Home extends Component {
           <section className="container-products">
             {products.length === 0 && (
               <p
-                className="mt-1 text-lg text-gray-500"
+                className={ initialMessage }
                 data-testid="home-initial-message"
               >
                 Digite algum termo de pesquisa ou escolha uma categoria.

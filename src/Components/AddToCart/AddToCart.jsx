@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { button } from './AddToCartClassName';
 
 function addToStorage(selectedProduct) {
   let newCart = [];
@@ -15,8 +16,7 @@ export default function AddToCart(props) {
   const { selectedProduct, dataTestId } = props;
   return (
     <button
-      className="bg-green-500 hover:bg-green-700
-      text-white font-bold py-2 px-4 rounded w-full"
+      className={ button }
       data-testid={ dataTestId }
       type="button"
       onClick={ () => {
