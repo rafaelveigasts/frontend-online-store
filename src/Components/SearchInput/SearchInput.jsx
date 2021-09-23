@@ -10,6 +10,7 @@ export default function SearchInput(props) {
   return (
     <form onSubmit={ handleSubmit }>
       <input
+        className="input-search"
         name="query"
         value={ query }
         onChange={ handleChange }

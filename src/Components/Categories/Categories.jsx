@@ -8,7 +8,7 @@ export default function Categories(props) {
   }
   return (
     <aside className="menu-categories">
-      Categorias:
+      <strong>Categorias:</strong>
       <ul>
         {categories.map((category) => (
           <li key={ category.id }>
@@ -19,6 +19,7 @@ export default function Categories(props) {
               type="button"
               value={ category.name }
               id={ category.id }
+              className="input-aside"
             />
           </li>
         ))}

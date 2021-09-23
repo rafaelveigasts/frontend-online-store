@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductNotFound from '../ProductNotFound/ProductNotFound';
 import AddTocart from '../AddToCart/AddToCart';
+import '../../pages/home.css';
 
 export default function ProductCard(props) {
   const { products, handleClick } = props;
@@ -20,9 +21,14 @@ export default function ProductCard(props) {
         } }
       >
         <div data-testid="product" className="product">
-          <p>{product.title}</p>
-          <img width="100px" src={ product.thumbnail } alt={ product.title } />
-          <p>
+          <p className="product-title">{product.title}</p>
+          <img
+            width="100px"
+            src={ product.thumbnail }
+            alt={ product.title }
+            className="image-product"
+          />
+          <p className="p-price">
             {new Intl.NumberFormat('pr-BR', {
               style: 'currency',
               currency: 'BRL',
@@ -37,6 +43,7 @@ export default function ProductCard(props) {
     </div>
   ));
 }
+
 ProductCard.propTypes = {
   products: PropTypes.arrayOf(),
 }.isRequired;
