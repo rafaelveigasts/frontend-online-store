@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import ProductNotFound from '../ProductNotFound/ProductNotFound';
 import AddTocart from '../AddToCart/AddToCart';
 import '../../pages/home.css';
+import {
+  container,
+  button,
+  h2,
+  imageContainer,
+  image,
+  p,
+} from './ProductCardClassName';
 
 export default function ProductCard(props) {
   const { products, handleClick } = props;
@@ -10,25 +18,26 @@ export default function ProductCard(props) {
     return <ProductNotFound />;
   }
   return products.map((product) => (
-    <div key={ product.id }>
+    <div className={ container } key={ product.id }>
       <button
-        data-testid="product-detail-link"
-        className="product-card"
+        className={ button }
         type="button"
         value={ product.title }
+        data-testid="product-detail-link"
         onClick={ () => {
           handleClick(product);
         } }
       >
-        <div data-testid="product" className="product">
-          <p className="product-title">{product.title}</p>
-          <img
-            width="100px"
-            src={ product.thumbnail }
-            alt={ product.title }
-            className="image-product"
-          />
-          <p className="p-price">
+        <div data-testid="product">
+          <h2 className={ h2 }>{product.title}</h2>
+          <div className={ imageContainer }>
+            <img
+              className={ image }
+              src={ product.thumbnail }
+              alt={ product.title }
+            />
+          </div>
+          <p className={ p }>
             {new Intl.NumberFormat('pr-BR', {
               style: 'currency',
               currency: 'BRL',
@@ -36,10 +45,7 @@ export default function ProductCard(props) {
           </p>
         </div>
       </button>
-      <AddTocart
-        selectedProduct={ product }
-        dataTestId="product-add-to-cart"
-      />
+      <AddTocart selectedProduct={ product } dataTestId="product-add-to-cart" />
     </div>
   ));
 }

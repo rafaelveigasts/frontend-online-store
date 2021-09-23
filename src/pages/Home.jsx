@@ -8,7 +8,8 @@ import {
 } from '../services/api';
 import Categories from '../Components/Categories/Categories';
 import ButtonCart from '../Components/ButtonCart/ButtonCart';
-import './home.css';
+// import './home.css';
+import { homeContainer, header, formContainer, initialMessage } from './HomeClassName';
 
 class Home extends Component {
   constructor(props) {
@@ -69,21 +70,23 @@ class Home extends Component {
   }
 
   render() {
-    const { products, categories, redirect } = this.state;
+    const { products, categories, redirect, query } = this.state;
     if (redirect) {
       return <Redirect to="/product-details" />;
     }
     return (
-      <div className="home-page">
-        <header className="header-home-page">
-          <div className="input-form">
+      <div className={ homeContainer }>
+        <header className={ header }>
+          <div
+            className={ formContainer }
+          >
             <SearchInput
               handleChange={ this.handleChange }
-              stateHome={ this.state }
+              query={ query }
               handleSubmit={ this.handleSubmit }
             />
+            <ButtonCart />
           </div>
-          <ButtonCart />
         </header>
         <main className="main-content">
           <Categories
@@ -91,6 +94,14 @@ class Home extends Component {
             handleChange={ this.handleChange }
           />
           <section className="container-products">
+            {products.length === 0 && (
+              <p
+                className={ initialMessage }
+                data-testid="home-initial-message"
+              >
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            )}
             <ProductCard products={ products } handleClick={ this.handleClick } />
           </section>
         </main>
