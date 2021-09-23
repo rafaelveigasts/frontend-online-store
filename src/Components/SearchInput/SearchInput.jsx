@@ -1,29 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SearchIcon } from '@heroicons/react/solid';
 
 export default function SearchInput(props) {
   const {
-    stateHome: { query, products },
+    query,
     handleChange,
     handleSubmit,
   } = props;
   return (
-    <form onSubmit={ handleSubmit }>
-      <input
-        className="input-search"
-        name="query"
-        value={ query }
-        onChange={ handleChange }
-        data-testid="query-input"
-      />
-      <button type="submit" data-testid="query-button">
-        Pesquisar
-      </button>
-      {products.length === 0 && (
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-      )}
+    <form className="w-full max-w-sm" onSubmit={ handleSubmit }>
+      <div className="flex items-center border-b border-teal-500 py-2">
+        <input
+          className="appearance-none bg-transparent border-none w-full
+            text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          name="query"
+          value={ query }
+          placeholder="Pesquisar produtos..."
+          onChange={ handleChange }
+          data-testid="query-input"
+        />
+        <button
+          className="flex-shrink-0 border-transparent border-4 text-white
+            hover:text-white text-sm py-1 px-2 rounded bg-pink-600"
+          type="submit"
+          data-testid="query-button"
+        >
+          <SearchIcon className="h-5 w-5 text-white-500" />
+        </button>
+      </div>
     </form>
   );
 }
