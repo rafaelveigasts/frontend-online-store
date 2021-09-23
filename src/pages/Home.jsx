@@ -28,6 +28,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    if (!localStorage.getItem('cart')) {
+      localStorage.setItem('cart', JSON.stringify([]));
+      console.log('criou');
+    }
     this.fetchCategories();
   }
 
